@@ -1,0 +1,292 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <title>COBrA Content Search</title>
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+    <!-- Bootstrap core CSS -->
+    <link href="css/bootstrap.min.css" rel="stylesheet">
+    <!-- Material Design Bootstrap -->
+    <link href="css/mdb.min.css" rel="stylesheet">
+    <!-- Your custom styles (optional) -->
+    <link href="css/style.css" rel="stylesheet">
+
+    <link href="css/pnotify.custom.min.css" rel="stylesheet">
+    <link href="css/animate.css" rel="stylesheet">
+
+</head>
+
+<style>
+  .item1 { grid-area: header; }
+  .item3 { grid-area: main; }
+  .item4 { grid-area: right; }
+  .item5 { grid-area: footer; }
+
+  .grid-container {
+    display: grid;
+    grid-template-areas:
+      ' header  header header header'
+      ' main main right right'
+      ' footer footer footer footer';
+    grid-gap: 10px;
+    padding: 10px;
+  }
+  .grid-container > div {
+    text-align: center;
+    padding: 20px 0;
+    font-size: 30px;
+  }
+</style>
+
+<body background="./img/overlays/background3.png" onload="settingUp()">
+
+    <!--Main Navigation-->
+    <nav class="navbar navbar-expand-lg bg-dark navbar-dark">
+            <div class="container-fluid">
+                <a class="navbar-brand" style="font-size: 2.5em" href="#"><strong>COBrA</strong></a>
+                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                    <ul class="navbar-nav mr-auto">
+                        <li class="nav-item">
+                            <a class="nav-link" style="font-size: 1.5em" href="./index.html">Home<span class="sr-only">(current)</span></a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" style="font-size: 1.5em" href="./Catalog.html">Catalog</a>
+                        </li>
+                        <li class="nav-item active">
+                            <a class="nav-link" style="font-size: 1.5em" href="#">Search</a>
+                        </li>
+                    </ul>
+                    <div id="addressINFO" class="nav-item"></strong></div>
+                    <div class="dropdown">
+                       <button id="dropdownText" class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown" onclick="selectAccount(this)">Select Address
+                       <span class="caret"></span></button>
+                       <ul id="list" class="dropdown-menu scrollable-menu"><ul>
+                    </div>
+                    <button  data-dismiss="modal" class="btn btn-orange fa fa-gears " data-toggle="modal" data-target="#modalPreferences"></button>
+                </div>
+            </div>
+    </nav>
+    <!--End Main Navigation-->
+
+
+    <!-- Material auto-sizing form -->
+    <div class="grid-container animated fadeIn">
+      <div class="item1 mt-3">
+          <div class="col-auto align-items-center">
+                  <div class="md-form">
+                      <input type="text" class="form-control mb-2 text-center" id="addressInput" style="font-weight: bold; color: white;" placeholder="INSERT CONTENT ADDRESS">
+                  </div>
+              <div class="col-auto">
+                  <button type="submit" onclick="searchByContentAddress(this)" class="btn btn-primary mb-0" style="width: 22rem;" data-toggle="modal" >Search</button>
+              </div>
+          </div>
+    </div>
+
+      <div class="item3 flex-center">
+          <div class="col-md-6 ">
+
+              <div class="card text-center mb-3" style="width: 22rem;">
+                <h3 class="card-header red lighten-1 white-text animated fadeIn">CONTENT NAME</h3>
+                <div class="card-body">
+                    <h4 class="card-title" id="ContentName">?</h4>
+                </div>
+              </div>
+
+              <div class="card text-center mb-3" style="width: 22rem;">
+                <h3 class="card-header indigo lighten-1 white-text animated fadeIn">GENRE</h3>
+                <div class="card-body">
+                    <h4 class="card-title"  id="Genre">?</h4>
+                </div>
+              </div>
+
+              <div class="card text-center mb-3" style="width: 22rem;">
+                <h3 class="animated fadeIn mb-3 card-header primary-color white-text">AUTHOR</h3>
+                <div class="card-body">
+                    <h4 class="card-title" id="Author">?</h4>
+                </div>
+              </div>
+
+          </div>
+      </div>
+
+
+      <div class="item4 flex-center">
+              <div class="col-md-6 ">
+                <!--Panel-->
+                  <div class="card border-primary mb-3" style="max-width: 18rem;">
+                    <div class="card-header text-primary">Appreciation</div>
+                      <div class="card-body text-primary">
+                        <div class="progress">
+                          <div id="Category1" class="progress-bar primary progress-bar-striped progress-bar-animated" style="width: 0%">?</div>
+                        </div>
+                      </div>
+                  </div>
+                  <!--/.Panel-->
+
+
+                  <!--Panel-->
+                  <div class="card border-secondary mb-3" style="max-width: 18rem;">
+                    <div class="card-header text-secondary">Quality</div>
+                      <div class="card-body text-secondary">
+                        <div class="progress">
+                            <div id="Category2" class="progress-bar purple progress-bar-striped progress-bar-animated" style="width: 0%">?</div>
+                        </div>
+                      </div>
+                  </div>
+                  <!--/.Panel-->
+
+                  <!--Panel-->
+                  <div class="card border-warning mb-3" style="max-width: 18rem;">
+                    <div class="card-header text-warning">Price Fairness</div>
+                      <div class="card-body text-warning">
+                        <div class="progress">
+                          <div id="Category3" class="progress-bar orange progress-bar-striped progress-bar-animated" style="width: 0%">?</div>
+                        </div>
+                      </div>
+                  </div>
+                  <!--/.Panel-->
+            </div>
+
+            <div class="col-md-6 ">
+
+              <div class="card border-black mb-3" style="max-width: 18rem;">
+                <div class="card-header text-black">VIEWS</div>
+                  <div class="card-body text-black">
+                    <h4 class="card-title" id="Views">?</h4>
+                  </div>
+              </div>
+
+              <div class="card border-danger mb-3" style="max-width: 18rem;">
+                <div class="card-header text-danger">OVERALL RATE</div>
+                  <div class="card-body text-danger">
+                    <div class="progress">
+                      <div id="Overall" class="progress-bar red progress-bar-striped progress-bar-animated" style="width: 0%">?</div>
+                    </div>
+                  </div>
+              </div>
+
+              <div class="row">
+                <button id="ConsumeContent" onclick="consumeContent(this)" type="button" class="btn btn-green btn-rounded" data-toggle="modal" >Consume Content</button>
+                <button id="LeaveFeedback" onclick="openFeedback(this)" type="button" class="btn btn-blue btn-rounded" data-toggle="modal">Leave a feedback!</button>
+              </div>
+        </div>
+      </div>
+      <div class="item5">
+        <div class="card text-center">
+            <div class="card-header teal white-text">PRICE</div>
+            <div class="card-footer text-muted color black-text">
+                <span class="mb-0" id="Price">?</span>
+                <span class="mb-0">Wei</span>
+            </div>
+        </div>
+      </div>
+    </div>
+
+    <!--- Modal FeedBack -->
+    <div class="modal fade" id="modalFeedback" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header text-center">
+                    <h4 class="modal-title w-100 font-weight-bold">FeedBack</h4>
+                    <button type="button" class="close red" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body md-form">
+                    <div class="d-flex justify-content-center">
+                        <span>Appreciation</span>
+                        <input id="cat1" onclick="valueSlider(this)" class="ml-3" type="range" min="0" max="100" value="50">
+                        <span id="cat1Value" class="ml-3">50</span>
+                    </div>
+                    <div class="d-flex justify-content-center mt-5">
+                        <span>Quality</span>
+                        <input id="cat2" onclick="valueSlider(this)" class="ml-3" type="range" min="0" max="100" value="50">
+                        <span  id="cat2Value" class="ml-3">50</span>
+                    </div>
+                    <div class="d-flex justify-content-center mt-5">
+                        <span>Price Fairness</span>
+                        <input id="cat3" onclick="valueSlider(this)" class="ml-3" type="range" min="0" max="100" value="50">
+                        <span  id="cat3Value" class="ml-3">50</span>
+                    </div>
+                </div>
+                <div class="modal-footer d-flex justify-content-center">
+                  <button onclick="sendFeedback()" class="btn btn-indigo">Send <i class="fa fa-paper-plane-o ml-1"></i></button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- FLuid Modal -->
+    <div class="modal fade right" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+          <div id="modalPos" class="modal-dialog" role="document">
+                <div class="modal-content">
+                  <div class="modal-header">
+                      <p id="headModal" class="heading lead"></p>
+                      <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true" class="white-text">×</span>
+                      </button>
+                  </div>
+                  <div class="modal-body">
+                      <div class="text-center">
+                          <i id="modalIcon" aria-hidden="true"></i>
+                      </div>
+                      <ul id="myList" class="list-group z-depth-0"></ul>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <!-- Preference Modal -->
+        <div class="modal fade" id="modalPreferences" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+          <div class="modal-dialog" role="document">
+              <div class="modal-content">
+                  <div class="modal-header orange text-center">
+                      <h4 class="modal-title w-100 white-text font-weight-bold">New Content Pubblication Notifies</h4>
+                      <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                          <span aria-hidden="true">&times;</span>
+                      </button>
+                  </div>
+                  <div class="modal-body mx-3">
+                      <div class="md-form mb-5">
+                        <select id="genreAuthorSelect" class="ml-2" name="category" size="1">
+                          <option>author</option>
+                          <option>genre</option>
+                        </select>
+                        <div class="md-form mb-5">
+                            <i class="fa fa-tag prefix grey-text"></i>
+                            <input type="text" id="genreAuthorInput" class="form-control validate">
+                            <label data-error="wrong" data-success="right" for="form34">Genre/Author</label>
+                        </div>
+                      </div>
+                  <div class="modal-footer d-flex justify-content-center">
+                      <button onclick="setPreferences()"  data-dismiss="modal" class="btn orange">OK<i class="fa fa-paper-plane-o ml-1"></i></button>
+                  </div>
+              </div>
+          </div>
+        </div>
+      </div>
+
+
+    <!-- SCRIPT -->
+    <script type="text/javascript" src="./js/contentManagement.js"></script>
+    <script type="text/javascript" src="./js/setting.js"></script>
+    <script type="text/javascript" src="./js/web3.js-0.20.6/dist/web3.js"></script>
+    <script type="text/javascript" src="js/jquery-3.3.1.min.js"></script>
+    <script type="text/javascript" src="./js/pnotify.custom.min.js"></script>
+    <!-- Bootstrap tooltips -->
+    <script type="text/javascript" src="js/popper.min.js"></script>
+    <!-- Bootstrap core JavaScript -->
+    <script type="text/javascript" src="js/bootstrap.min.js"></script>
+    <!-- MDB core JavaScript -->
+    <script type="text/javascript" src="js/mdb.min.js"></script>
+</body>
+
+</html>

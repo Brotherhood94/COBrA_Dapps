@@ -1,0 +1,317 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <title>COBrA Catalog</title>
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+    <!-- Bootstrap core CSS -->
+    <link href="css/bootstrap.min.css" rel="stylesheet">
+    <!-- Material Design Bootstrap -->
+    <link href="css/mdb.min.css" rel="stylesheet">
+    <!-- Your custom styles (optional) -->
+    <link href="css/style.css" rel="stylesheet">
+    <link href="css/pnotify.custom.min.css" rel="stylesheet">
+
+    <link href="css/animate.css" rel="stylesheet">
+
+</head>
+<style>
+  .item1 { grid-area: header; }
+  .item3 { grid-area: main; }
+  .item4 { grid-area: right; }
+  .item5 { grid-area: footer; }
+
+  .grid-container {
+    display: grid;
+    grid-template-areas:
+      ' header header header header'
+      ' main main right right'
+      ' main main right right';
+    grid-gap: 10px;
+    padding: 10px;
+  }
+  .grid-container > div {
+    text-align: center;
+    padding: 0px ;
+    font-size: 20px;
+  }
+</style>
+
+
+
+<body background="./img/overlays/background3.png"  onload="settingUp()">
+
+    <!--Main Navigation-->
+    <nav class="navbar navbar-expand-lg bg-dark navbar-dark">
+            <div class="container-fluid">
+                <a class="navbar-brand" style="font-size: 2.5em" href="#"><strong>COBrA</strong></a>
+                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                    <ul class="navbar-nav mr-auto">
+                        <li class="nav-item">
+                            <a class="nav-link" style="font-size: 1.5em" href="./index.html">Home<span class="sr-only">(current)</span></a>
+                        </li>
+                        <li class="nav-item active">
+                            <a class="nav-link" style="font-size: 1.5em" href="#">Catalog</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" style="font-size: 1.5em" href="./ContentSearch.html">Search</a>
+                        </li>
+                    </ul>
+                    <div id="addressINFO" class="nav-item"></strong></div>
+                    <div class="dropdown">
+                       <button id="dropdownText" class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown" onclick="selectAccount(this)">Select Address
+                       <span class="caret"></span></button>
+                       <ul id="list" class="dropdown-menu scrollable-menu"><ul>
+                    </div>
+                    <button  data-dismiss="modal" class="btn btn-orange fa fa-gears " data-toggle="modal" data-target="#modalPreferences"></button>
+                </div>
+            </div>
+    </nav>
+    <!--End Main Navigation-->
+
+
+    <div class="grid-container">
+      <div class="item4 animated fadeIn">
+        <div class="row">
+          <button onclick="closeCatalog()" type="button" class="btn red btn-rounded ml-4 mt-4" style="font-size: 20px" data-toggle="modal" >CLOSE CATALOG</button>
+          <div class="card text-center ml-3 mt-3">
+            <h3 class="card-header red lighten-1 white-text ">Go Premium</h3>
+            <div class="card-body">
+              <span class="">
+                  <input type="text" class="form-control mb-2 text-center black-text" placeholder="Insert Price (Finney)">
+                  <button  onclick="buyPremium(this)" type="button" class="btn red btn-rounded" data-toggle="modal" >OK</button>
+              </span>
+            </div>
+          </div>
+        </div>
+        <div class="row ">
+          <div class="card text-center ml-3 mt-3">
+            <h3 class="card-header red lighten-1 white-text ">BUY Content <br>(only Standard)</h3>
+            <div class="card-body">
+              <span class="">
+                  <input type="text" class="form-control mb-2 text-center black-text" placeholder="Insert Content Name">
+                  <button  onclick="getContent(this)" type="button" class="btn red btn-rounded" data-toggle="modal">OK</button>
+              </span>
+            </div>
+          </div>
+          <div class="card text-center ml-3 mt-3">
+            <h3 class="card-header red lighten-1 white-text ">GET Content<br>(only Premium)</h3>
+            <div class="card-body">
+              <span class="">
+                  <input type="text" class="form-control mb-2 text-center black-text" placeholder="Insert Content Name">
+                  <button  onclick="getContentPremium(this)" type="button" class="btn red btn-rounded" data-toggle="modal">OK</button>
+              </span>
+            </div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="card text-center ml-3 mt-3">
+            <h3 class="card-header red lighten-1 white-text ">GIFT Content</h3>
+            <div class="card-body">
+              <span class="">
+                <input type="text" class="form-control mb-2 text-center black-text" placeholder="Insert Address">
+                <input type="text" class="form-control mb-2 text-center black-text" placeholder="Insert Content Name">
+                <button  onclick="giftContent(this)" type="button" class="btn red btn-rounded" data-toggle="modal" >OK</button>
+              </span>
+            </div>
+          </div>
+          <div class="card text-center ml-3 mt-3">
+            <h3 class="card-header red lighten-1 white-text ">GIFT Premium</h3>
+            <div class="card-body">
+              <span class="">
+                <input type="text" class="form-control mb-2 text-center black-text" placeholder="Insert Address">
+                <input type="text" class="form-control mb-2 text-center black-text" placeholder="Insert Price (Finney)">
+                <button  onclick="giftPremium(this)" type="button" class="btn red btn-rounded" data-toggle="modal">OK</button>
+              </span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+
+      <div class="item3 animated fadeIn">
+        <div class="row mt-3 ml-3 ">
+          <div class="card text-center ml-3 mt-3">
+            <h3 class="card-header grey lighten-1 white-text ">Get Content Address</h3>
+            <div class="card-body">
+              <span class="">
+                  <input type="text"  class="form-control mb-2 text-center black-text" placeholder="Insert Content Name">
+                  <button  onclick="getContentManagement(this)" type="button" class="btn grey btn-rounded" data-toggle="modal" >OK</button>
+              </span>
+            </div>
+          </div>
+          <button onclick="appendToStatistics()" type="button" class="btn btn-orange btn-rounded ml-4 mt-4" style="font-size: 20px" data-toggle="modal"  >Statistics</button>
+          <div class="card text-center ml-3 mt-3">
+            <h3 class="card-header deep-orange lighten-1 white-text ">Newest Content</h3>
+            <div class="card-body">
+              <span class="">
+                  <input type="text" class="form-control mb-2 text-center black-text" placeholder="How Many?">
+                  <button  onclick="appendToNewest(this)" type="button" class="btn deep-orange btn-rounded" data-toggle="modal"  >OK</button>
+              </span>
+            </div>
+          </div>
+          <div class="card text-center ml-3 mt-3">
+            <h3 class="card-header deep-orange lighten-1 white-text ">Most Rated</h3>
+            <div class="card-body">
+              <span class="">
+                  <button onclick="appendMostRated(this)" type="button" class="btn deep-orange btn-rounded" data-toggle="modal"  >OK</button>
+                  <select class="ml-2" name="category" size="1">
+                    <option>Appreciation</option>
+                    <option>Quality</option>
+                    <option>Price Fairness</option>
+                    <option selected>Overall</option>
+                  </select>
+              </span>
+            </div>
+          </div>
+
+        </div>
+
+      <div class="row mt-3 ml-3">
+        <div class="card text-center ml-3 mt-3">
+          <h3 class="card-header indigo lighten-1 white-text ">Latest By Genre</h3>
+          <div class="card-body">
+            <span class="">
+                <input type="text"  class="form-control mb-2 text-center black-text" placeholder="Insert Genre">
+                <button  onclick="appendLatestByGenre(this)" type="button" class="btn indigo btn-rounded" data-toggle="modal"  >OK</button>
+            </span>
+          </div>
+        </div>
+        <div class="card text-center ml-3 mt-3">
+          <h3 class="card-header indigo lighten-1 white-text ">Most Popular By Genre</h3>
+          <div class="card-body">
+            <span class="">
+                <input type="text"  class="form-control mb-2 text-center black-text" placeholder="Insert Genre">
+                <button  onclick="appendMostPopularByGenre(this)" type="button" class="btn indigo btn-rounded" data-toggle="modal" >OK</button>
+            </span>
+          </div>
+        </div>
+        <div class="card text-center ml-3 mt-3">
+          <h3 class="card-header indigo lighten-1 white-text ">Most Rated By Genre</h3>
+          <div class="card-body">
+            <span class="">
+                <input type="text"  class="form-control mb-2 text-center black-text" placeholder="Insert Genre">
+                <button  onclick="appendMostRatedByGenre(this)" type="button" class="btn indigo btn-rounded" data-toggle="modal" >OK</button>
+                <select class="ml-2" name="category" size="1">
+                  <option>Appreciation</option>
+                  <option>Quality</option>
+                  <option>Price Fairness</option>
+                  <option selected>Overall</option>
+                </select>
+            </span>
+          </div>
+        </div>
+      </div>
+      <div class="row mt-3 ml-3">
+        <div class="card text-center ml-3 mt-3">
+          <h3 class="card-header indigo lighten-1 white-text ">Latest By Author</h3>
+          <div class="card-body">
+            <span class="">
+                <input type="text"  class="form-control mb-2 text-center black-text" placeholder="Insert Author Address">
+                <button  onclick="appendLatestByAuthor(this)" type="button" class="btn indigo btn-rounded" data-toggle="modal" >OK</button>
+            </span>
+          </div>
+        </div>
+        <div class="card text-center ml-3 mt-3">
+          <h3 class="card-header indigo lighten-1 white-text ">Most Popular By Author</h3>
+          <div class="card-body">
+            <span class="">
+                <input type="text"  class="form-control mb-2 text-center black-text" placeholder="Insert Author Address">
+                <button  onclick="appendMostPopularByAuthor(this)" type="button" class="btn indigo btn-rounded" data-toggle="modal" >OK</button>
+            </span>
+          </div>
+        </div>
+          <div class="card text-center ml-3 mt-3">
+            <h3 class="card-header indigo lighten-1 white-text ">Most Rated By Author</h3>
+            <div class="card-body">
+              <span class="">
+                  <input type="text"  class="form-control mb-2 text-center black-text" placeholder="Insert Author Address">
+                  <button  onclick="appendMostRatedByAuthor(this)" type="button" class="btn indigo btn-rounded" data-toggle="modal" >OK</button>
+                  <select class="ml-2" name="category" size="1">
+                    <option>Appreciation</option>
+                    <option>Quality</option>
+                    <option>Price Fairness</option>
+                    <option selected>Overall</option>
+                  </select>
+              </span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+
+    <!-- FLuid Modal -->
+    <div class="modal fade right" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+          <div id="modalPos" class="modal-dialog" role="document">
+                <div class="modal-content">
+                  <div class="modal-header">
+                      <p id="headModal" class="heading lead"></p>
+                      <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true" class="white-text">×</span>
+                      </button>
+                  </div>
+                  <div class="modal-body">
+                      <div class="text-center">
+                          <i id="modalIcon" aria-hidden="true"></i>
+                      </div>
+                      <ul id="myList" class="list-group z-depth-0"></ul>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <!-- Preference Modal -->
+        <div class="modal fade" id="modalPreferences" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+          <div class="modal-dialog" role="document">
+              <div class="modal-content">
+                  <div class="modal-header orange text-center">
+                      <h4 class="modal-title w-100 white-text font-weight-bold">New Content Pubblication Notifies</h4>
+                      <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                          <span aria-hidden="true">&times;</span>
+                      </button>
+                  </div>
+                  <div class="modal-body mx-3">
+                      <div class="md-form mb-5">
+                        <select id="genreAuthorSelect" class="ml-2" name="category" size="1">
+                          <option>author</option>
+                          <option>genre</option>
+                        </select>
+                        <div class="md-form mb-5">
+                            <i class="fa fa-tag prefix grey-text"></i>
+                            <input type="text" id="genreAuthorInput" class="form-control validate">
+                            <label data-error="wrong" data-success="right" for="form34">Genre/Author</label>
+                        </div>
+                      </div>
+                  <div class="modal-footer d-flex justify-content-center">
+                      <button onclick="setPreferences()"  data-dismiss="modal" class="btn orange">OK<i class="fa fa-paper-plane-o ml-1"></i></button>
+                  </div>
+              </div>
+          </div>
+        </div>
+      </div>
+
+
+    <!-- SCRIPTS -->
+    <script type="text/javascript" src="./js/catalog.js"></script>
+    <script type="text/javascript" src="./js/setting.js"></script>
+    <script type="text/javascript" src="./js/web3.js-0.20.6/dist/web3.js"></script>
+    <script type="text/javascript" src="js/jquery-3.3.1.min.js"></script>
+    <script type="text/javascript" src="./js/pnotify.custom.min.js"></script>
+    <!-- Bootstrap tooltips -->
+    <script type="text/javascript" src="js/popper.min.js"></script>
+    <!-- Bootstrap core JavaScript -->
+    <script type="text/javascript" src="js/bootstrap.min.js"></script>
+    <!-- MDB core JavaScript -->
+    <script type="text/javascript" src="js/mdb.min.js"></script>
+</body>
+
+</html>
