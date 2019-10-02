@@ -5,7 +5,10 @@ The goal of this project is to implement a decentralized content publishing serv
 ## To run
 
 ### Start a Ethereum's testnet node
+
+```
 geth --testnet --syncmode "light" --datadir "./ethereumTestnet"  --rpc --rpcapi db,eth,net,web3,personal --cache=4096  --rpcport 8545 --rpcaddr 127.0.0.1 --rpccorsdomain "*"
+```
 
 Import your address in **/ethereumTestnet/keystore** directory
 
